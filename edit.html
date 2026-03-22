@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Article - NoctuShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="admin.html"><i class="fas fa-arrow-left"></i> RETOUR PANEL</a>
+        </nav>
+    </header>
+
+    <main class="panel-container">
+        <div class="neon-box form-container" style="border-color: var(--neon-yellow); box-shadow: 0 0 15px var(--neon-yellow);">
+            <h2 class="form-title" style="color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow);">ÉDITION PRODUIT</h2>
+            
+            <p style="text-align: center; color: #ccc;" id="loading-msg">Chargement des données...</p>
+
+            <form id="edit-product-form" style="display: none; flex-direction: column; gap: 15px;">
+                <input type="hidden" id="edit-id">
+                
+                <label style="color: var(--neon-blue); font-weight: bold;">Nom du produit :</label>
+                <input type="text" id="edit-name" class="neon-input" required>
+                
+                <label style="color: var(--neon-blue); font-weight: bold;">Prix (€) :</label>
+                <input type="number" id="edit-price" step="0.01" class="neon-input" required>
+                
+                <label style="color: var(--neon-blue); font-weight: bold;">Catégorie :</label>
+                <select id="edit-cat" class="neon-input">
+                    <option value="boissons">Boissons</option>
+                    <option value="snacks">Snacks</option>
+                    <option value="autres">Autres / Glaces</option>
+                </select>
+                
+                <label style="color: var(--neon-blue); font-weight: bold;">Image (Laisser vide pour ne pas changer) :</label>
+                <div id="edit-dropzone" class="neon-dropzone" style="text-align:center; padding:15px; border:2px dashed var(--neon-blue); border-radius:10px; cursor:pointer; color:#aaa; font-size:14px; position:relative;">
+                    <span id="edit-dropzone-text">📸 Glissez une nouvelle image ici ou cliquez</span>
+                    <input type="file" id="edit-file-input" accept="image/*" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer;">
+                </div>
+                <input type="hidden" id="edit-image">
+
+                <div style="text-align: center; margin-top: 10px;">
+                    <img id="edit-preview" src="" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid var(--neon-blue); border-radius: 5px; padding: 5px;">
+                </div>
+                
+                <button type="submit" id="btn-save" class="btn-ajouter-bas" style="border-color: var(--neon-yellow); color: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow) inset, 0 0 10px var(--neon-yellow);">SAUVEGARDER LES MODIFICATIONS</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="edit.js"></script>
+</body>
+</html>

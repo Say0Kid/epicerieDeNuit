@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - NoctuShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> ACCUEIL</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="neon-box form-container">
+            <h2 class="form-title">CONNEXION</h2>
+            <div id="error-msg" style="color: red; text-align: center; display: none;"></div>
+            
+            <input type="email" id="email" class="neon-input" placeholder="Adresse Email" required>
+            <input type="password" id="password" class="neon-input" placeholder="Mot de passe" required>
+            
+            <button id="btn-login" class="btn-ajouter-bas">SE CONNECTER</button>
+            <button id="btn-register" class="btn-ajouter-bas" style="border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue);">S'INSCRIRE</button>
+        </div>
+    </main>
+
+    <script type="module" src="auth.js"></script>
+</body>
+</html>

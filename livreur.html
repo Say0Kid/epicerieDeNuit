@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Livreur - NoctuShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> ACCUEIL</a>
+        </nav>
+    </header>
+
+    <main class="panel-container" style="max-width: 900px;">
+        <div class="neon-box" style="border-color: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); text-align: left;">
+            <h2 class="form-title" style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); text-align: center;">PANNEAU LIVREUR 🛵</h2>
+            <p style="text-align: center;">Connecté en tant que <span id="livreur-email" style="font-weight:bold; color:var(--neon-yellow);"></span>.</p>
+            
+            <!-- SECTION MISSIONS -->
+            <div style="margin-top: 30px;">
+                <h3 style="color:var(--neon-blue); text-align:center;">Missions Disponibles & En Cours</h3>
+                <p style="text-align:center; color:#ccc; font-size: 0.9em;">Activez le GPS de votre appareil lorsque vous prenez une commande.</p>
+                <div id="gps-status" style="text-align:center; margin-bottom: 20px; font-weight:bold;"></div>
+
+                <table class="neon-table" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Heure</th>
+                            <th>Client / Tel</th>
+                            <th>Adresse</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                            <th>Action & GPS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="livreur-orders-list">
+                        <tr><td colspan="6" style="text-align:center;">Chargement des missions...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center;">
+                <button id="btn-logout" class="btn-ajouter-bas logout-btn" style="margin-top: 50px; width: 300px;">SE DÉCONNECTER</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="livreur.js"></script>
+</body>
+</html>

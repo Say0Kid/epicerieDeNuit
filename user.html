@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Utilisateur - NoctuShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> ACCUEIL</a>
+        </nav>
+    </header>
+
+    <main class="panel-container">
+        <div class="neon-box">
+            <h2 class="form-title" style="color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue);">ESPACE UTILISATEUR</h2>
+            <p>Bienvenue sur votre compte <span id="user-email" style="font-weight:bold; color:var(--neon-yellow);"></span>.</p>
+            
+            <div style="margin-top: 30px; border-top: 1px solid var(--neon-blue); padding-top: 20px;">
+                <h3 class="col-subtitle" style="color:var(--neon-pink);">Profil de Livraison</h3>
+                <form id="profile-form" style="display:flex; flex-direction:column; gap:10px; max-width: 400px; margin: 0 auto;">
+                    <label style="text-align: left; color:#ccc;">Nom :</label>
+                    <input type="text" id="profile-name" class="neon-input" placeholder="Votre nom" required>
+                    
+                    <label style="text-align: left; color:#ccc;">Téléphone :</label>
+                    <input type="tel" id="profile-phone" class="neon-input" placeholder="Votre numéro" required>
+                    
+                    <label style="text-align: left; color:#ccc;">Adresse de livraison :</label>
+                    <input type="text" id="profile-address" class="neon-input" placeholder="10 Rue de Paris, 75001" required>
+                    
+                    <button type="submit" id="btn-save-profile" class="neon-btn pink" style="margin-top:10px;">ENREGISTRER</button>
+                    <p id="profile-msg" style="color:var(--neon-yellow); display:none; margin-top:5px;"></p>
+                </form>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 class="col-subtitle">Historique des commandes</h3>
+                <p style="color:#ccc;">Aucune commande récente.</p>
+            </div>
+
+            <button id="btn-logout" class="btn-ajouter-bas logout-btn" style="margin-top: 50px;">SE DÉCONNECTER</button>
+        </div>
+    </main>
+
+    <script type="module" src="panel.js"></script>
+</body>
+</html>

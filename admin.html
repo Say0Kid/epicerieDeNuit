@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Administrateur - NoctuShop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> ACCUEIL</a>
+        </nav>
+    </header>
+
+    <main class="panel-container" style="max-width: 1000px;">
+        <div class="neon-box" style="border-color: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); text-align: left;">
+            <h2 class="form-title" style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); text-align: center;">PANNEAU D'ADMINISTRATION</h2>
+            <p style="text-align: center;">Bienvenue Boss, loggé en tant que <span id="admin-email" style="font-weight:bold; color:var(--neon-yellow);"></span>.</p>
+            
+            <!-- ONGLETS -->
+            <div style="display:flex; justify-content:center; gap:20px; margin: 30px 0;">
+                <button class="capsule" id="tab-prod" style="border-color:var(--neon-pink); color:var(--neon-pink);">📦 GESTION PRODUITS</button>
+                <button class="capsule" id="tab-cmd" style="border-color:var(--neon-blue); color:var(--neon-blue);">🛵 COMMANDES CLIENTS</button>
+            </div>
+
+            <!-- SECTION PRODUITS (CRUD) -->
+            <div id="section-produits">
+                <div class="neon-box" style="background: rgba(255,0,255,0.05); margin-bottom: 20px;">
+                    <h3 id="form-title" style="color:var(--neon-pink); margin-top:0;">Ajouter un Produit</h3>
+                    <form id="add-product-form" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                        <input type="hidden" id="p-id">
+                        <input type="text" id="p-name" class="neon-input" placeholder="Nom complet (ex: COCA-COLA (35CL))" required style="flex:1; min-width:200px;">
+                        <input type="number" id="p-price" step="0.01" class="neon-input" placeholder="Prix (€)" required style="width:100px;">
+                        <select id="p-cat" class="neon-input" style="width:150px;">
+                            <option value="boissons">Boissons</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="autres">Autres / Glaces</option>
+                        </select>
+                        <div id="dropzone" class="neon-dropzone" style="flex:1; min-width:200px; text-align:center; padding:15px; border:2px dashed var(--neon-pink); border-radius:10px; cursor:pointer; color:#aaa; font-size:14px; position:relative;">
+                            <span id="dropzone-text">📸 Glissez une image ici ou cliquez</span>
+                            <input type="file" id="file-input" accept="image/*" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer;">
+                        </div>
+                        <input type="hidden" id="p-image">
+                        <button type="submit" id="submit-btn" class="btn-ajouter-bas" style="width:auto; margin:0; padding:15px 20px;">AJOUTER</button>
+                        <button type="button" id="cancel-edit-btn" class="btn-ajouter-bas" style="width:auto; margin:0; padding:15px 20px; display:none; border-color:var(--neon-yellow); color:var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow) inset, 0 0 10px var(--neon-yellow);">ANNULER</button>
+                    </form>
+                </div>
+
+                <table class="neon-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom du Produit</th>
+                            <th>Prix</th>
+                            <th>Catégorie</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-prod-list">
+                        <tr><td colspan="5" style="text-align:center;">Chargement des produits depuis Firebase...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SECTION COMMANDES -->
+            <div id="section-commandes" style="display:none;">
+                <h3 style="color:var(--neon-blue); text-align:center;">Historique des Commandes en cours</h3>
+                <table class="neon-table" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Client & Contact</th>
+                            <th>Adresse</th>
+                            <th>Détails (Articles)</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-orders-list">
+                        <tr><td colspan="7" style="text-align:center;">Chargement des commandes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center;">
+                <button id="btn-logout" class="btn-ajouter-bas logout-btn" style="margin-top: 50px; width: 300px;">SE DÉCONNECTER</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="panel.js"></script>
+    <script type="module" src="admin-crud.js"></script>
+    <script type="module">
+        // Double check admin role here
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                getDoc(doc(db, "users", user.uid)).then(snap => {
+                    if(!snap.exists() || snap.data().role !== 'admin') {
+                        window.location.href = "user.html";
+                    } else {
+                        document.getElementById('admin-email').textContent = user.email;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoctuShop - Épicerie de Nuit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-nav">
+        <nav>
+            <a href="#"><i class="fas fa-bars"></i> MENU</a>
+            <a href="#" id="btn-panier"><i class="fas fa-shopping-cart"></i> PANIER</a>
+            <a href="login.html"><i class="fas fa-user"></i> COMPTE</a>
+            <a href="#"><i class="fas fa-truck"></i> SUIVI</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <h1 class="title-epicerie">ÉPICERIE</h1>
+        <h1 class="title-denuit">DE NUIT</h1>
+        <p class="subtitle">- OUVERT TARD -</p>
+        <div class="banner-livraison">LIVRAISON NOCTURNE</div>
+        <div class="hero-image-placeholder">
+            <!-- Emplacement pour l'illustration scooter -->
+            <img src="assets/img/scooter-hero.jpg" alt="Scooter Delivery" onerror="this.style.display='none'">
+        </div>
+        <div class="phone-number">COMMANDER : 07 45 51 74 94</div>
+    </section>
+
+    <main class="layout-3cols">
+        <!-- Colonne 1 : Boissons -->
+        <section class="col neon-box" id="col-boissons">
+            <h2 class="col-title"><i class="fas fa-glass-martini-alt"></i> BOISSONS FRAÎCHES</h2>
+            <div class="product-list" id="list-boissons"></div>
+        </section>
+
+        <!-- Colonne 2 : Snacks -->
+        <section class="col neon-box" id="col-snacks">
+            <h2 class="col-title"><i class="fas fa-cookie"></i> SNACKS ET DOUCEURS</h2>
+            <div class="product-list" id="list-snacks"></div>
+        </section>
+
+        <!-- Colonne 3 : Autres -->
+        <section class="col neon-box" id="col-autres">
+            <h2 class="col-title"><i class="fas fa-smoking"></i> AUTRES ARTICLES</h2>
+            <div class="product-list" id="list-autres"></div>
+        </section>
+    </main>
+
+    <!-- Tracker en dessous -->
+    <div style="max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px;">
+        <section class="col neon-box tracker-col">
+            <h2 class="col-title"><i class="fas fa-map-marked-alt"></i> SUIVI DE LIVRAISON EN TEMPS RÉEL</h2>
+            <div id="tracker-container" style="height: 400px;">
+                <div id="map" style="width: 100%; height: 100%;"></div>
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <p id="tracker-status" style="color: var(--neon-blue); font-weight: bold;">En attente de commande...</p>
+            </div>
+        </section>
+    </div>
+
+    <div class="floating-cart" id="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-badge" class="badge">0</span>
+    </div>
+
+    <!-- MODAL DU PANIER -->
+    <div id="cart-modal" class="cart-modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); overflow:auto;">
+        <div class="cart-modal-content neon-box" style="background:var(--bg-color); margin:10% auto; padding:20px; width:90%; max-width:600px; border-radius:10px; position:relative; border:2px solid var(--neon-pink); box-shadow:0 0 20px var(--neon-pink);">
+            <span id="close-cart" style="color:var(--neon-pink); float:right; font-size:28px; font-weight:bold; cursor:pointer;"><i class="fas fa-times"></i></span>
+            <h2 style="color:var(--neon-pink); margin-top:0;"><i class="fas fa-shopping-cart"></i> VOTRE PANIER</h2>
+            
+            <div id="cart-items-list" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+                <!-- Les articles aparaîtront ici -->
+            </div>
+            
+            <div style="font-size:24px; text-align:right; margin:20px 0; font-weight:bold;">Total : <span id="cart-total-price">0.00</span> €</div>
+            
+            <form id="order-form" style="display:flex; flex-direction:column; gap:10px; margin-top:20px; border-top:1px solid rgba(255,0,255,0.2); padding-top:20px;">
+                <h3 style="color:var(--neon-blue); margin-top:0;">LIVRAISON EXPRESS 🛵</h3>
+                <input type="text" id="order-name" class="neon-input" placeholder="Votre Nom complet" required>
+                <input type="tel" id="order-phone" class="neon-input" placeholder="Numéro de téléphone" required>
+                <input type="text" id="order-address" class="neon-input" placeholder="Adresse complète" required>
+                <button type="submit" id="btn-valider-commande" class="neon-btn pink" style="margin-top:10px; padding:15px; font-size:18px;">VALIDER LA COMMANDE</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        LIVRAISON : <15KM 3€ . >15KM +5€ · HORAIRES : SEMAINE 23H-04H, WE - 05H
+    </footer>
+
+    <!-- Leaflet JS (Open-source Google Maps alternative for easy setup without CC) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
