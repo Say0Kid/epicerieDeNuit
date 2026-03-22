@@ -7,6 +7,10 @@
     --neon-yellow: #ffcc00;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -25,10 +29,11 @@ body {
 /* TOP NAV (MOBILE FIRST) */
 .top-nav {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 15px 10px;
 }
-.top-nav nav {
+.top-nav nav, .mobile-nav-burger {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -39,6 +44,44 @@ body {
     box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-blue);
     background: rgba(0, 0, 0, 0.5);
 }
+
+/* Base Burger Icon hidden */
+.burger-icon {
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+@media (max-width: 899px) {
+    .burger-header .burger-icon {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .burger-header .mobile-nav-burger {
+        display: none; /* hidden behind burger */
+        flex-direction: column;
+        width: 100%;
+        max-width: 250px;
+        margin-top: 15px;
+        background: rgba(10, 14, 39, 0.95);
+        border: 2px solid var(--neon-pink);
+        box-shadow: 0 0 20px var(--neon-pink);
+    }
+    .burger-header .mobile-nav-burger.show {
+        display: flex;
+    }
+}
+
 .top-nav a {
     color: var(--neon-blue);
     text-decoration: none;
@@ -132,7 +175,20 @@ body {
     .subtitle { font-size: 1.5em; }
     .banner-livraison { padding: 10px 30px; font-size: 1.8em; }
     .phone-number { font-size: 2.5em; }
-    .top-nav nav { gap: 20px; padding: 10px 30px; border-radius: 30px; }
+    
+    .burger-icon { display: none; }
+    .mobile-nav-burger {
+        display: flex !important;
+        flex-direction: row;
+        gap: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 2px solid var(--neon-blue);
+        border-radius: 30px;
+        padding: 10px 30px;
+        margin-top: 0;
+        box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+        width: auto;
+    }
 }
 
 .neon-box {

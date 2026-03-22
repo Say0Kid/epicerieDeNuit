@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header class="top-nav">
-        <nav>
-            <a href="#"><i class="fas fa-bars"></i> MENU</a>
-            <a href="#" id="btn-panier"><i class="fas fa-shopping-cart"></i> PANIER</a>
-            <a href="login.html"><i class="fas fa-user"></i> COMPTE</a>
-            <a href="#"><i class="fas fa-truck"></i> SUIVI</a>
+    <header class="top-nav burger-header">
+        <button id="burger-toggle" class="burger-icon"><i class="fas fa-bars"></i> MENU</button>
+        <nav id="mobile-nav" class="mobile-nav-burger">
+            <a href="#col-boissons" class="nav-link"><i class="fas fa-shopping-bag"></i> LA CARTE</a>
+            <a href="#" id="btn-panier" class="nav-link"><i class="fas fa-shopping-cart"></i> PANIER</a>
+            <a href="login.html" class="nav-link"><i class="fas fa-user"></i> COMPTE</a>
+            <a href="#tracker-section" class="nav-link" id="btn-suivi"><i class="fas fa-truck"></i> SUIVI</a>
         </nav>
     </header>
 
@@ -50,7 +51,7 @@
     </main>
 
     <!-- Tracker en dessous -->
-    <div style="max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px;">
+    <div id="tracker-section" style="max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px;">
         <section class="col neon-box tracker-col">
             <h2 class="col-title"><i class="fas fa-map-marked-alt"></i> SUIVI DE LIVRAISON EN TEMPS RÉEL</h2>
             <div id="tracker-container" style="height: 400px;">

@@ -131,6 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Menus & Burger
+    const burgerToggle = document.getElementById('burger-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if(burgerToggle && mobileNav) {
+        burgerToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('show');
+        });
+        
+        // Cacher le menu quand on clique sur un lien en mobile
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('show');
+            });
+        });
+    }
+
     if(btnPanierNav) btnPanierNav.addEventListener('click', (e) => { e.preventDefault(); modal.style.display = 'block'; });
     if(btnPanierFloat) btnPanierFloat.addEventListener('click', () => { modal.style.display = 'block'; });
     if(closeBtn) closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
